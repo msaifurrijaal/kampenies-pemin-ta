@@ -1,4 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+final formKey = GlobalKey<FormState>();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,11 +13,34 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool passToggle = false;
+
+  void checkValidation() {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      Fluttertoast.showToast(
+        msg: 'Silahkan isi email dan kata sandi dahulu!',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16,
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Gas login',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final buttonPadding = EdgeInsets.all(screenWidth * 0.03);
-    final buttonWidth = screenWidth * 0.42;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -32,49 +60,78 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Email',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black),
-                ),
-                const SizedBox(height: 8),
-                const TextField(
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    hintText: "Email",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                      borderSide: BorderSide(color: Color(0xFFEAECF0)),
-                    ),
-                    filled: true,
-                    fillColor: Color(0xFFF5FAFF),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Kata Sandi',
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black),
-                ),
-                const SizedBox(height: 8),
-                const TextField(
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    hintText: "Kata Sandi",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                      borderSide: BorderSide(color: Color(0xFFEAECF0)),
-                    ),
-                    filled: true,
-                    fillColor: Color(0xFFF5FAFF),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Email',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          hintText: "Email",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                            borderSide: BorderSide(color: Color(0xFFEAECF0)),
+                          ),
+                          focusedBorder: InputBorder.none,
+                          filled: true,
+                          fillColor: Color(0xFFF5FAFF),
+                        ),
+                        validator: (email) =>
+                            email!.isEmpty ? 'Silahkan isi email' : null,
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Kata Sandi',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        controller: passwordController,
+                        obscureText: !passToggle,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          hintText: "Kata Sandi",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                            borderSide: BorderSide(color: Color(0xFFEAECF0)),
+                          ),
+                          focusedBorder: InputBorder.none,
+                          filled: true,
+                          fillColor: Color(0xFFF5FAFF),
+                          suffixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                passToggle = !passToggle;
+                              });
+                            },
+                            child: Icon(
+                                passToggle
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.grey),
+                          ),
+                        ),
+                        validator: (password) =>
+                            password!.isEmpty ? 'Silahkan isi password' : null,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -118,23 +175,33 @@ class _LoginPageState extends State<LoginPage> {
                     minimumSize:
                         MaterialStateProperty.all(Size(double.infinity, 48)),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Gas login')),
+                      );
+                    }
+                  },
                   child: Text('Masuk'),
                 ),
                 const SizedBox(height: 28),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(color: Colors.grey),
-                      height: 1,
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(color: Colors.black),
+                        height: 0.5,
+                      ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 14),
                     const Text('atau masuk dengan'),
-                    const SizedBox(width: 10),
-                    Container(
-                      decoration: BoxDecoration(color: Colors.grey),
-                      height: 1,
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(color: Colors.black),
+                        height: 0.5,
+                      ),
                     ),
                   ],
                 ),
@@ -214,7 +281,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color(0xFF1570EF)),
                     )
                   ],
-                )
+                ),
               ],
             ),
           ),
