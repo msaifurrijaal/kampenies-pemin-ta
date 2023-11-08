@@ -1,43 +1,58 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:kampenies/pages/regis_page.dart';
 
 final formKey = GlobalKey<FormState>();
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  static const routeName = "/regis-page";
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController ConfirmPasswordController =
+      TextEditingController();
   bool passToggle = false;
+  bool confirmPassToggle = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Center(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.black,
+          onPressed: () => Navigator.pop(context),
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+        ),
+        title: Center(
           child: Text(
-            'Masuk',
+            'Daftar',
             style:
                 TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
           ),
         ),
+        actions: [
+          Icon(
+            Icons.menu,
+            color: Colors.transparent,
+          )
+        ],
         elevation: 0,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 25, left: 20, right: 20),
+            padding: EdgeInsets.only(top: 25, left: 20, right: 20),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Form(
                   key: formKey,
@@ -118,6 +133,47 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (password) =>
                             password!.isEmpty ? 'Silahkan isi password' : null,
                       ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'Konfirmasi Kata Sandi',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        controller: ConfirmPasswordController,
+                        obscureText: !confirmPassToggle,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          hintText: "Konfirmasi Kata Sandi",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                            borderSide: BorderSide(color: Color(0xFFEAECF0)),
+                          ),
+                          focusedBorder: InputBorder.none,
+                          filled: true,
+                          fillColor: Color(0xFFF5FAFF),
+                          suffixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                confirmPassToggle = !confirmPassToggle;
+                              });
+                            },
+                            child: Icon(
+                                confirmPassToggle
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.grey),
+                          ),
+                        ),
+                        validator: (password) => password!.isEmpty
+                            ? 'Silahkan isi konfirmasi password'
+                            : null,
+                      ),
                     ],
                   ),
                 ),
@@ -169,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     }
                   },
-                  child: Text('Masuk'),
+                  child: Text('Daftar'),
                 ),
                 const SizedBox(height: 28),
                 Row(
@@ -182,7 +238,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(width: 14),
-                    const Text('atau masuk dengan'),
+                    const Text('atau daftar dengan'),
                     const SizedBox(width: 14),
                     Expanded(
                       child: Container(
@@ -252,14 +308,12 @@ class _LoginPageState extends State<LoginPage> {
                 InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onTap: () {
-                    Navigator.pushNamed(context, RegisterPage.routeName);
-                  },
+                  onTap: () => Navigator.pop(context),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Belum mempunyai akun?',
+                        'Sudah mempunyai akun?',
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w300,
@@ -267,7 +321,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        'Daftar',
+                        'Masuk',
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
