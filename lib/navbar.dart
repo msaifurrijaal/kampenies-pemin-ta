@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kampenies/bloc/employee/employee_bloc.dart';
+import 'package:kampenies/bloc/mentor/mentor_bloc.dart';
 import 'package:kampenies/pages/home_page.dart';
 import 'package:kampenies/pages/konsultasi_page.dart';
 import 'package:kampenies/pages/media_page.dart';
@@ -23,30 +26,40 @@ class _NavbarState extends State<Navbar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 22,
-        elevation: 10,
-        currentIndex: selectedIndex,
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Kampenies_App.icon_beranda), label: 'Beranda'),
-          BottomNavigationBarItem(
-              icon: Icon(Kampenies_App.icon_konsultasi), label: 'Konsultasi'),
-          BottomNavigationBarItem(
-              icon: Icon(Kampenies_App.icon_media), label: 'Media'),
-          BottomNavigationBarItem(
-              icon: Icon(Kampenies_App.icon_profile), label: 'Profile'),
-        ],
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: const Color(0xFF1570EF),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => MentorBloc()..add(GetMentorEvent()),
+        ),
+        BlocProvider(
+          create: (context) => EmployeeBloc()..add(GetEmployeeEvent()),
+        ),
+      ],
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          iconSize: 22,
+          elevation: 10,
+          currentIndex: selectedIndex,
+          onTap: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(Kampenies_App.icon_beranda), label: 'Beranda'),
+            BottomNavigationBarItem(
+                icon: Icon(Kampenies_App.icon_konsultasi), label: 'Konsultasi'),
+            BottomNavigationBarItem(
+                icon: Icon(Kampenies_App.icon_media), label: 'Media'),
+            BottomNavigationBarItem(
+                icon: Icon(Kampenies_App.icon_profile), label: 'Profile'),
+          ],
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: const Color(0xFF1570EF),
+        ),
+        body: pages[selectedIndex],
       ),
-      body: pages[selectedIndex],
     );
   }
 }

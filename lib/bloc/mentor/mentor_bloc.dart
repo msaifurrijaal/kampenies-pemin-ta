@@ -8,16 +8,20 @@ part 'mentor_state.dart';
 
 class MentorBloc extends Bloc<MentorEvent, MentorState> {
   MentorBloc() : super(MentorInitial()) {
+    List<Mentor> mentors = [];
     on<GetMentorEvent>((event, emit) async {
-      emit(MentorLoading());
-      final response = await http.get(
-        Uri.parse(
-            'https://654b7a515b38a59f28ef2618.mockapi.io/kampenies/mentor'),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      );
-      emit(MentorSuccess(mentors: mentorFromJson(response.body)));
+      if (mentors.length == 0) {
+        emit(MentorLoading());
+        final response = await http.get(
+          Uri.parse(
+              'https://654b7a515b38a59f28ef2618.mockapi.io/kampenies/mentor'),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        );
+        mentors = mentorFromJson(response.body);
+      }
+      emit(MentorSuccess(mentors: mentors));
     });
   }
 }
