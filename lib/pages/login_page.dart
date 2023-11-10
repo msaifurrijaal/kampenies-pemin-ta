@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kampenies/pages/regis_page.dart';
+import 'package:kampenies/navbar.dart';
 
 final formKey = GlobalKey<FormState>();
 
@@ -17,6 +18,29 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool passToggle = false;
+  bool checkboxToggle = false;
+
+  void checkValidation() {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      Fluttertoast.showToast(
+        msg: 'Silahkan isi email dan kata sandi dahulu!',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16,
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Gas login',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,9 +153,11 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       children: [
                         Checkbox(
-                          value: false,
-                          onChanged: (value) {
-                            // Do something when the checkbox is checked or unchecked.
+                          value: checkboxToggle,
+                          onChanged: (bool? newValue) {
+                            setState(() {
+                              checkboxToggle = newValue!;
+                            });
                           },
                           checkColor: Colors.white,
                           fillColor: MaterialStateProperty.all(Colors.blue),
@@ -164,9 +190,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Gas login')),
-                      );
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Navbar()));
                     }
                   },
                   child: Text('Masuk'),
@@ -194,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 24),
                 Row(
-                  children: <Widget>[
+                  children: [
                     Expanded(
                       child: Container(
                         height: 50,
@@ -257,7 +282,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text(
                         'Belum mempunyai akun?',
                         style: TextStyle(

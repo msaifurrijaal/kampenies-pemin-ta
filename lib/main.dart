@@ -13,9 +13,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: const LoginPage(),
+      theme: ThemeData(fontFamily: 'Satoshi'),
       routes: {
-        RegisterPage.routeName: (context) => RegisterPage(),
+        RegisterPage.routeName: (context) => const RegisterPage(),
       },
     );
   }
