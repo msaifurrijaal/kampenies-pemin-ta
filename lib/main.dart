@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kampenies/pages/login_page.dart';
 import 'package:kampenies/pages/regis_page.dart';
+import 'package:kampenies/theme.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,7 +15,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const LoginPage(),
-      theme: ThemeData(fontFamily: 'Satoshi'),
+      theme: lightTheme,
       routes: {
         RegisterPage.routeName: (context) => const RegisterPage(),
       },

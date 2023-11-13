@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:kampenies/theme.dart';
 
 final formKey = GlobalKey<FormState>();
 
@@ -36,8 +37,10 @@ class _RegisterPageState extends State<RegisterPage> {
         title: Center(
           child: Text(
             'Daftar',
-            style:
-                TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.copyWith(fontWeight: FontWeight.w500),
           ),
         ),
         actions: [
@@ -59,12 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Email',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
@@ -94,12 +94,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                       ),
                       const SizedBox(height: 16),
-                      const Text(
+                      Text(
                         'Kata Sandi',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
@@ -134,12 +131,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             password!.isEmpty ? 'Silahkan isi password' : null,
                       ),
                       const SizedBox(height: 16),
-                      const Text(
+                      Text(
                         'Konfirmasi Kata Sandi',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
@@ -192,31 +186,27 @@ class _RegisterPageState extends State<RegisterPage> {
                           checkColor: Colors.white,
                           fillColor: MaterialStateProperty.all(Colors.blue),
                         ),
-                        const Text(
+                        Text(
                           'Ingat Saya',
-                          style: TextStyle(fontSize: 14),
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     ),
-                    const Text(
+                    Text(
                       'Lupa password?',
-                      style: TextStyle(color: Color(0xFF194185), fontSize: 12),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: darkBlueColor),
                     ),
                   ],
                 ),
                 const SizedBox(height: 24),
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                      Color(0xFF1570EF),
+                    minimumSize: MaterialStateProperty.all(
+                      Size(double.infinity, 48),
                     ),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    minimumSize:
-                        MaterialStateProperty.all(Size(double.infinity, 48)),
                   ),
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
@@ -225,7 +215,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       );
                     }
                   },
-                  child: Text('Daftar'),
+                  child: Text(
+                    'Daftar',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w500, color: whiteColor),
+                  ),
                 ),
                 const SizedBox(height: 28),
                 Row(
@@ -238,7 +232,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     const SizedBox(width: 14),
-                    const Text('atau daftar dengan'),
+                    Text(
+                      'atau daftar dengan',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                     const SizedBox(width: 14),
                     Expanded(
                       child: Container(
@@ -266,10 +263,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               SizedBox(width: 8),
                               Text(
                                 "Google",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w700),
                               ),
                             ],
                           ),
@@ -292,10 +289,13 @@ class _RegisterPageState extends State<RegisterPage> {
                               SizedBox(width: 8),
                               Text(
                                 "Facebook",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: whiteColor,
+                                    ),
                               ),
                             ],
                           ),
@@ -314,18 +314,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       Text(
                         'Sudah mempunyai akun?',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black),
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       SizedBox(width: 4),
                       Text(
                         'Masuk',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF1570EF)),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: darkBlueColor,
+                            ),
                       )
                     ],
                   ),

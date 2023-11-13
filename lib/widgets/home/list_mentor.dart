@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kampenies/widgets/home/item_widget.dart';
+import 'package:kampenies/widgets/home/item_mentor.dart';
 
 import '../../bloc/mentor/mentor_bloc.dart';
 
