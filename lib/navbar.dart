@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kampenies/bloc/employee/employee_bloc.dart';
+import 'package:kampenies/bloc/media/media_bloc.dart';
 import 'package:kampenies/bloc/mentor/mentor_bloc.dart';
 import 'package:kampenies/pages/home_page.dart';
 import 'package:kampenies/pages/konsultasi_page.dart';
 import 'package:kampenies/pages/media_page.dart';
 import 'package:kampenies/pages/profile_page.dart';
 import 'package:kampenies/app_icons.dart';
+
+import 'kampenies__app_icons.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
@@ -34,6 +37,9 @@ class _NavbarState extends State<Navbar> {
         BlocProvider(
           create: (context) => EmployeeBloc()..add(GetEmployeeEvent()),
         ),
+        BlocProvider(
+          create: (context) => MediaBloc()..add(GetArticlesEvent()),
+        ),
       ],
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
@@ -51,7 +57,7 @@ class _NavbarState extends State<Navbar> {
             BottomNavigationBarItem(
                 icon: Icon(Kampenies_App.icon_konsultasi), label: 'Konsultasi'),
             BottomNavigationBarItem(
-                icon: Icon(Kampenies_App.icon_media), label: 'Media'),
+                icon: Icon(Kampenies_Appp.book), label: 'Media'),
             BottomNavigationBarItem(
                 icon: Icon(Kampenies_App.icon_profile), label: 'Profile'),
           ],

@@ -29,6 +29,10 @@ flutter:
     - family: Kampenies_App
       fonts:
         - asset: assets/fonts/Kampenies_App.ttf
+        
+    - family : Kampenies2
+      fonts:
+        - asset : assets/fonts/Kampenies_App2.ttf
 
     - family: Satoshi
       fonts:
