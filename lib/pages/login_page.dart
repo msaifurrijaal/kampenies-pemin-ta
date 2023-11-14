@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kampenies/pages/regis_page.dart';
 import 'package:kampenies/navbar.dart';
-import 'package:kampenies/theme.dart';
 
 final formKey = GlobalKey<FormState>();
 
