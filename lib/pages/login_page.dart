@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:kampenies/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kampenies/pages/regis_page.dart';
 import 'package:kampenies/navbar.dart';
 
@@ -30,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             'Masuk',
             style: Theme.of(context)
                 .textTheme
-                .bodyLarge
+                .titleLarge
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
         ),
@@ -60,14 +59,14 @@ class _LoginPageState extends State<LoginPage> {
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 12),
                           hintText: "Email",
-                          hintStyle: TextStyle(color: Colors.grey),
+                          hintStyle: TextStyle(color: greyColor),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(6)),
-                            borderSide: BorderSide(color: Color(0xFFEAECF0)),
+                            borderSide: BorderSide(color: softGreyColor),
                           ),
                           focusedBorder: InputBorder.none,
                           filled: true,
-                          fillColor: Color(0xFFF5FAFF),
+                          fillColor: greyLightColor,
                         ),
                         validator: (email) {
                           if (email == null || email.isEmpty) {
@@ -92,14 +91,14 @@ class _LoginPageState extends State<LoginPage> {
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 12),
                           hintText: "Kata Sandi",
-                          hintStyle: TextStyle(color: Colors.grey),
+                          hintStyle: TextStyle(color: greyColor),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(6)),
-                            borderSide: BorderSide(color: Color(0xFFEAECF0)),
+                            borderSide: BorderSide(color: softGreyColor),
                           ),
                           focusedBorder: InputBorder.none,
                           filled: true,
-                          fillColor: Color(0xFFF5FAFF),
+                          fillColor: greyLightColor,
                           suffixIcon: InkWell(
                             onTap: () {
                               setState(() {
@@ -110,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                 passToggle
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Colors.grey),
+                                color: greyColor),
                           ),
                         ),
                         validator: (password) => password!.isEmpty
@@ -134,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                               checkboxToggle = newValue!;
                             });
                           },
-                          checkColor: Colors.white,
+                          checkColor: whiteColor,
                           fillColor: MaterialStateProperty.all(Colors.blue),
                         ),
                         Text(
@@ -177,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(color: Colors.black),
+                        decoration: BoxDecoration(color: blackColor),
                         height: 0.5,
                       ),
                     ),
@@ -189,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(width: 14),
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(color: Colors.black),
+                        decoration: BoxDecoration(color: blackColor),
                         height: 0.5,
                       ),
                     ),
@@ -203,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                         child: Center(
                           child: Row(

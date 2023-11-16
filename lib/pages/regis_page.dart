@@ -17,7 +17,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController ConfirmPasswordController =
+  final TextEditingController confirmPasswordController =
       TextEditingController();
   bool passToggle = false;
   bool confirmPassToggle = false;
@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          color: Colors.black,
+          color: blackColor,
           onPressed: () => Navigator.pop(context),
           highlightColor: Colors.transparent,
           splashColor: Colors.transparent,
@@ -39,11 +39,14 @@ class _RegisterPageState extends State<RegisterPage> {
             'Daftar',
             style: Theme.of(context)
                 .textTheme
-                .bodyLarge
+                .titleLarge
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
         ),
-        actions: [
+        actions: const [
+          SizedBox(
+            width: 20,
+          ),
           Icon(
             Icons.menu,
             color: Colors.transparent,
@@ -74,14 +77,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 12),
                           hintText: "Email",
-                          hintStyle: TextStyle(color: Colors.grey),
+                          hintStyle: TextStyle(color: greyColor),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(6)),
-                            borderSide: BorderSide(color: Color(0xFFEAECF0)),
+                            borderSide: BorderSide(color: softGreyColor),
                           ),
                           focusedBorder: InputBorder.none,
                           filled: true,
-                          fillColor: Color(0xFFF5FAFF),
+                          fillColor: greyLightColor,
                         ),
                         validator: (email) {
                           if (email == null || email.isEmpty) {
@@ -106,14 +109,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 12),
                           hintText: "Kata Sandi",
-                          hintStyle: TextStyle(color: Colors.grey),
+                          hintStyle: TextStyle(color: greyColor),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(6)),
-                            borderSide: BorderSide(color: Color(0xFFEAECF0)),
+                            borderSide: BorderSide(color: softGreyColor),
                           ),
                           focusedBorder: InputBorder.none,
                           filled: true,
-                          fillColor: Color(0xFFF5FAFF),
+                          fillColor: greyLightColor,
                           suffixIcon: InkWell(
                             onTap: () {
                               setState(() {
@@ -124,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 passToggle
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Colors.grey),
+                                color: greyColor),
                           ),
                         ),
                         validator: (password) =>
@@ -137,20 +140,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       const SizedBox(height: 8),
                       TextFormField(
-                        controller: ConfirmPasswordController,
+                        controller: confirmPasswordController,
                         obscureText: !confirmPassToggle,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 12),
                           hintText: "Konfirmasi Kata Sandi",
-                          hintStyle: TextStyle(color: Colors.grey),
+                          hintStyle: TextStyle(color: greyColor),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(6)),
-                            borderSide: BorderSide(color: Color(0xFFEAECF0)),
+                            borderSide: BorderSide(color: softGreyColor),
                           ),
                           focusedBorder: InputBorder.none,
                           filled: true,
-                          fillColor: Color(0xFFF5FAFF),
+                          fillColor: greyLightColor,
                           suffixIcon: InkWell(
                             onTap: () {
                               setState(() {
@@ -161,7 +164,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 confirmPassToggle
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Colors.grey),
+                                color: greyColor),
                           ),
                         ),
                         validator: (password) => password!.isEmpty
@@ -183,8 +186,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           onChanged: (value) {
                             // Do something when the checkbox is checked or unchecked.
                           },
-                          checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.all(Colors.blue),
+                          checkColor: whiteColor,
+                          fillColor: MaterialStateProperty.all(blueColor),
                         ),
                         Text(
                           'Ingat Saya',
@@ -227,7 +230,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(color: Colors.black),
+                        decoration: BoxDecoration(color: blackColor),
                         height: 0.5,
                       ),
                     ),
@@ -239,7 +242,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(width: 14),
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(color: Colors.black),
+                        decoration: BoxDecoration(color: blackColor),
                         height: 0.5,
                       ),
                     ),
@@ -253,7 +256,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                         child: Center(
                           child: Row(
