@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kampenies/navbar.dart';
 import 'package:kampenies/pages/login_page.dart';
 import 'package:kampenies/pages/regis_page.dart';
 import 'package:kampenies/theme.dart';
@@ -15,7 +14,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Navbar(),
+      home: const LoginPage(),
       theme: lightTheme,
       routes: {
         RegisterPage.routeName: (context) => const RegisterPage(),

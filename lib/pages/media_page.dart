@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kampenies/bloc/media/media_bloc.dart';
 import 'package:kampenies/kampenies__app_icons.dart';
+import 'package:kampenies/theme.dart';
 import '../widgets/media/item_widget_article.dart';
 
 class Media_Page extends StatefulWidget {
@@ -59,6 +60,7 @@ class _Media_PageState extends State<Media_Page> {
               height: screenHeight * 0.03,
             ),
             SearchBar(
+              backgroundColor: const MaterialStatePropertyAll(whiteColor),
               onChanged: (value) {
                 MediaBloc().add(SearchArticle(query: value));
                 print(MediaBloc().state.toString());
@@ -70,7 +72,7 @@ class _Media_PageState extends State<Media_Page> {
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                   color: Color(0xff98A2B3))),
-              elevation: const MaterialStatePropertyAll(2),
+              //elevation: const MaterialStatePropertyAll(2),
               leading: Container(
                 padding: const EdgeInsets.all(10),
                 child: const Icon(
