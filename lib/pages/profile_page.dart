@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:kampenies/theme.dart';
 
 class Profile_Page extends StatelessWidget {
   const Profile_Page({super.key});
@@ -66,29 +67,36 @@ class Profile_Page extends StatelessWidget {
                     ),
                     Center(
                       child: Stack(
-                        alignment: Alignment.bottomRight,
                         children: [
-                          ClipOval(
-                            child: Container(
-                              width: 140,
-                              height: 140,
-                              child: Image.network(
-                                'https://randomuser.me/api/portraits/men/5.jpg',
-                                fit: BoxFit.cover,
+                          Container(
+                            width: 150,
+                            height: 150,
+                            decoration: const ShapeDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    "https://randomuser.me/api/portraits/men/5.jpg"),
+                                fit: BoxFit.fill,
+                              ),
+                              shape: OvalBorder(
+                                side: BorderSide(width: 6, color: whiteColor),
                               ),
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(90),
+                          Positioned(
+                            right: 8,
+                            bottom: 0,
+                            child: Container(
+                              padding: EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(90),
+                                ),
                               ),
-                            ),
-                            child: Icon(
-                              Icons.edit,
-                              color: Color(0xFF3E83EB),
+                              child: Icon(
+                                Icons.edit,
+                                color: Color(0xFF3E83EB),
+                              ),
                             ),
                           )
                         ],

@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: transparentColor,
         title: Center(
           child: Text(
             'Masuk',
@@ -255,8 +255,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 36),
                 InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                  splashColor: transparentColor,
+                  highlightColor: transparentColor,
                   onTap: () {
                     Navigator.pushNamed(context, RegisterPage.routeName);
                   },
