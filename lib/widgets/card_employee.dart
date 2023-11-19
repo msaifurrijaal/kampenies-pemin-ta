@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kampenies/models/employee.dart';
+import 'package:kampenies/pages/detail_employee_page.dart';
 import 'package:kampenies/theme.dart';
+import 'package:kampenies/widgets/card_age_widget.dart';
 
 class CardEmployee extends StatelessWidget {
   const CardEmployee({
@@ -12,7 +14,13 @@ class CardEmployee extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          DetailEmployeePage.routeName,
+          arguments: employee,
+        );
+      },
       child: Container(
         decoration: const BoxDecoration(
             color: Colors.white,
@@ -73,32 +81,7 @@ class CardEmployee extends StatelessWidget {
                       textAlign: TextAlign.justify,
                     ),
                     const SizedBox(height: 4),
-                    ElevatedButton.icon(
-                      style: ButtonStyle(
-                          padding: const MaterialStatePropertyAll(
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                          ),
-                          shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50))),
-                          elevation: const MaterialStatePropertyAll(0),
-                          foregroundColor:
-                              const MaterialStatePropertyAll(blueColor),
-                          backgroundColor: const MaterialStatePropertyAll(
-                              Color(0xffEFF8FF))),
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.cases_outlined,
-                        size: 20,
-                      ),
-                      label: Text(
-                        "${employee.usia} Tahun",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.copyWith(color: blueColor),
-                      ),
-                    ),
+                    AgeCard(age: employee.usia),
                   ],
                 ),
               ),

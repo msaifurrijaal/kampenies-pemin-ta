@@ -7,6 +7,7 @@ const Color softBlueColor = Color(0xFFEFF8FF);
 const Color blackColor = Color(0xFF000000);
 const Color whiteColor = Color(0xffFFFFFF);
 const Color greyColor = Color(0xff98A2B3);
+const Color darkGreyColor = Color(0xFF667085);
 const Color softGreyColor = Color(0xFFCCCCCC);
 const Color greyLightColor = Color(0xFFebebeb);
 Color transparentColor = const Color(0xffFFFFFF).withOpacity(0.0);

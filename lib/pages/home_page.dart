@@ -201,7 +201,7 @@ class _Home_PageState extends State<Home_Page> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Struktur Perusahaan',
+                        'Karyawan',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               fontWeight: FontWeight.w700,
                             ),
