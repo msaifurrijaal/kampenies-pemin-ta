@@ -32,13 +32,13 @@ class _NavbarState extends State<Navbar> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => MentorBloc()..add(GetMentorEvent()),
+          create: (context) => MentorBloc(),
         ),
         BlocProvider(
-          create: (context) => EmployeeBloc()..add(GetEmployeeEvent()),
+          create: (context) => EmployeeBloc(),
         ),
         BlocProvider(
-          create: (context) => MediaBloc()..add(GetArticlesEvent()),
+          create: (context) => MediaBloc(),
         ),
       ],
       child: Scaffold(

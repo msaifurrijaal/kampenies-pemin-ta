@@ -26,13 +26,13 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: transparentColor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: blackColor,
           onPressed: () => Navigator.pop(context),
-          highlightColor: Colors.transparent,
-          splashColor: Colors.transparent,
+          highlightColor: transparentColor,
+          splashColor: transparentColor,
         ),
         title: Center(
           child: Text(
@@ -43,13 +43,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 ?.copyWith(fontWeight: FontWeight.w500),
           ),
         ),
-        actions: const [
+        actions: [
           SizedBox(
             width: 20,
           ),
           Icon(
             Icons.menu,
-            color: Colors.transparent,
+            color: transparentColor,
           )
         ],
         elevation: 0,
@@ -309,8 +309,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 36),
                 InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                  splashColor: transparentColor,
+                  highlightColor: transparentColor,
                   onTap: () => Navigator.pop(context),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
