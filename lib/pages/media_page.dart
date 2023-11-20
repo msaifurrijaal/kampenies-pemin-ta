@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, unused_local_variable
+// ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,16 +7,17 @@ import 'package:kampenies/kampenies__app_icons.dart';
 import 'package:kampenies/theme.dart';
 import '../widgets/item_widget_article.dart';
 
-class MediaPage extends StatefulWidget {
-  const MediaPage({super.key});
+class Media_Page extends StatefulWidget {
+  const Media_Page({super.key});
 
   @override
-  State<MediaPage> createState() => _MediaPageState();
+  State<Media_Page> createState() => _Media_PageState();
 }
 
-class _MediaPageState extends State<MediaPage> {
+class _Media_PageState extends State<Media_Page> {
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     context.read<MediaBloc>().add(GetArticlesEvent());
   }
@@ -24,7 +25,6 @@ class _MediaPageState extends State<MediaPage> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
@@ -78,13 +78,16 @@ class _MediaPageState extends State<MediaPage> {
                       ),
                       backgroundColor:
                           const MaterialStatePropertyAll(bgEditTextColor),
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        BlocProvider.of<MediaBloc>(context)
+                            .add(SearchArticle(query: value));
+                      },
                       textStyle: MaterialStatePropertyAll(
                           Theme.of(context).textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w100,
                                 color: greyColor,
                               )),
-                      hintText: "Cari",
+                      hintText: "Cari Artikel",
                       hintStyle: MaterialStatePropertyAll(
                           Theme.of(context).textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w100,

@@ -64,7 +64,10 @@ class _EmployeePageState extends State<EmployeePage> {
                       ),
                       backgroundColor:
                           const MaterialStatePropertyAll(bgEditTextColor),
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        BlocProvider.of<EmployeeBloc>(context)
+                            .add(SearchEmployee(query: value));
+                      },
                       textStyle: MaterialStatePropertyAll(
                           Theme.of(context).textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w100,
