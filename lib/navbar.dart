@@ -23,7 +23,7 @@ class _NavbarState extends State<Navbar> {
   List pages = [
     const HomePage(),
     const EmployeePage(),
-    const MediaPage(),
+    const Media_Page(),
     const ProfilePage()
   ];
 
@@ -56,7 +56,7 @@ class _NavbarState extends State<Navbar> {
             BottomNavigationBarItem(
                 icon: Icon(Kampenies_App.icon_beranda), label: 'Beranda'),
             BottomNavigationBarItem(
-                icon: Icon(Kampenies_App.icon_konsultasi), label: 'Konsultasi'),
+                icon: Icon(Kampenies_App.icon_konsultasi), label: 'Karyawan'),
             BottomNavigationBarItem(
                 icon: Icon(Kampenies_Appp.book), label: 'Media'),
             BottomNavigationBarItem(
