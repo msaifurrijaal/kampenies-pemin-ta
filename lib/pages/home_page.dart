@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,17 +10,16 @@ import 'package:kampenies/theme.dart';
 import 'package:kampenies/widgets/card_employee.dart';
 import 'package:kampenies/widgets/card_mentor.dart';
 
-class Home_Page extends StatefulWidget {
-  const Home_Page({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<Home_Page> createState() => _Home_PageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _Home_PageState extends State<Home_Page> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<MentorBloc>().add(GetMentorEvent());
     context.read<EmployeeBloc>().add(GetEmployeeEvent());

@@ -1,30 +1,29 @@
-// ignore_for_file: camel_case_types, unused_local_variable
+// ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kampenies/bloc/media/media_bloc.dart';
+import 'package:kampenies/bloc/employee/employee_bloc.dart';
 import 'package:kampenies/kampenies__app_icons.dart';
 import 'package:kampenies/theme.dart';
-import '../widgets/item_widget_article.dart';
+import 'package:kampenies/widgets/card_employee.dart';
 
-class MediaPage extends StatefulWidget {
-  const MediaPage({super.key});
+class EmployeePage extends StatefulWidget {
+  const EmployeePage({super.key});
 
   @override
-  State<MediaPage> createState() => _MediaPageState();
+  State<EmployeePage> createState() => _EmployeePageState();
 }
 
-class _MediaPageState extends State<MediaPage> {
+class _EmployeePageState extends State<EmployeePage> {
   @override
   void initState() {
     super.initState();
-    context.read<MediaBloc>().add(GetArticlesEvent());
+    context.read<EmployeeBloc>().add(GetEmployeeEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
@@ -39,24 +38,11 @@ class _MediaPageState extends State<MediaPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Artikel",
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: blueColor,
-                            ),
-                      ),
-                      const SizedBox(width: 20),
-                      Text(
-                        "Video",
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: greyColor,
-                            ),
-                      ),
-                    ],
+                  Text(
+                    "Karyawan",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                   const Icon(
                     Kampenies_Appp.list_bookmark,
@@ -122,21 +108,21 @@ class _MediaPageState extends State<MediaPage> {
             ],
           ),
         ),
-        body: BlocBuilder<MediaBloc, MediaState>(
+        body: BlocBuilder<EmployeeBloc, EmployeeState>(
           builder: (context, state) {
-            if (state is ArticlesLoading) {
+            if (state is EmployeeLoading) {
               return Center(
                 heightFactor: screenHeight * 0.3,
                 child: const CircularProgressIndicator(),
               );
             }
-            if (state is ArticlesSuccess) {
+            if (state is EmployeeSuccess) {
               return ListView.builder(
                 shrinkWrap: true,
-                itemCount: state.articles.length,
+                itemCount: state.employee.length,
                 itemBuilder: (context, index) {
-                  return ItemArticles(
-                    articles: state.articles[index],
+                  return CardEmployee(
+                    employee: state.employee[index],
                   );
                 },
               );
