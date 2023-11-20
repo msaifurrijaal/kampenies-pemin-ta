@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kampenies/bloc/employee/employee_bloc.dart';
 import 'package:kampenies/bloc/media/media_bloc.dart';
 import 'package:kampenies/bloc/mentor/mentor_bloc.dart';
+import 'package:kampenies/pages/employee_page.dart';
 import 'package:kampenies/pages/home_page.dart';
-import 'package:kampenies/pages/konsultasi_page.dart';
 import 'package:kampenies/pages/media_page.dart';
 import 'package:kampenies/pages/profile_page.dart';
 import 'package:kampenies/app_icons.dart';
@@ -21,10 +21,10 @@ class Navbar extends StatefulWidget {
 class _NavbarState extends State<Navbar> {
   int selectedIndex = 0;
   List pages = [
-    const Home_Page(),
-    const Konsultasi_Page(),
-    const Media_Page(),
-    const Profile_Page()
+    const HomePage(),
+    const EmployeePage(),
+    const MediaPage(),
+    const ProfilePage()
   ];
 
   @override
