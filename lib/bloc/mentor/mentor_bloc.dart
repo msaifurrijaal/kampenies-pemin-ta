@@ -10,7 +10,7 @@ class MentorBloc extends Bloc<MentorEvent, MentorState> {
   MentorBloc() : super(MentorInitial()) {
     List<Mentor> mentors = [];
     on<GetMentorEvent>((event, emit) async {
-      if (mentors.length == 0) {
+      if (mentors.isEmpty) {
         emit(MentorLoading());
         final response = await http.get(
           Uri.parse(
