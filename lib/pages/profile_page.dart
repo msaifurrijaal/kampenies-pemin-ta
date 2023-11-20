@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:kampenies/theme.dart';
 
-class Profile_Page extends StatelessWidget {
-  const Profile_Page({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class Profile_Page extends StatelessWidget {
                   bottomLeft: Radius.circular(26),
                   bottomRight: Radius.circular(26),
                 ),
-                color: Color(0xFF0E64E6),
+                color: blueColor,
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 26),
@@ -50,7 +50,7 @@ class Profile_Page extends StatelessWidget {
                                 Text(
                                   'Bisnis Saya',
                                   style: TextStyle(
-                                      fontSize: 11, color: Colors.white),
+                                      fontSize: 11, color: whiteColor),
                                 ),
                               ],
                             ),
@@ -58,7 +58,7 @@ class Profile_Page extends StatelessWidget {
                         ),
                         Icon(
                           Icons.more_horiz,
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                       ],
                     ),
@@ -88,7 +88,7 @@ class Profile_Page extends StatelessWidget {
                             child: Container(
                               padding: EdgeInsets.all(6),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: whiteColor,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(90),
                                 ),
@@ -110,7 +110,7 @@ class Profile_Page extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
-                          color: Colors.white,
+                          color: whiteColor,
                           fontFamily: 'assets/fonts/Kampenies_App.ttf'),
                     ),
                     SizedBox(
@@ -121,7 +121,7 @@ class Profile_Page extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
-                          color: Colors.white,
+                          color: whiteColor,
                           fontFamily: 'assets/fonts/Kampenies_App.ttf'),
                     ),
                     SizedBox(
@@ -149,12 +149,12 @@ class Profile_Page extends StatelessWidget {
                     side: BorderSide(width: 1, color: Color(0xFFEAECF0)),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  color: Colors.white,
+                  color: whiteColor,
                   shadows: [
                     BoxShadow(
-                      color: Color(0x0F000000),
+                      color: greyLightColor,
                       blurRadius: 12,
-                      offset: Offset(0, 3),
+                      offset: Offset(0, 0),
                       spreadRadius: 0,
                     )
                   ],
@@ -167,7 +167,7 @@ class Profile_Page extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'assets/fonts/Kampenies_App.ttf',
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                        color: blackColor,
                         fontSize: 16,
                       ),
                     ),
@@ -183,19 +183,19 @@ class Profile_Page extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.edit_document,
-                                  color: Color(0xFF4B5565),
+                                  color: darkGreyColor,
                                 ),
                                 SizedBox(width: 12),
                                 Text(
                                   'Ubah Data Akun',
                                   style: TextStyle(
-                                      color: Color(0xFF4B5565), fontSize: 14),
+                                      color: darkGreyColor, fontSize: 14),
                                 )
                               ],
                             ),
                             Icon(
                               Icons.keyboard_arrow_right,
-                              color: Color(0xFF4B5565),
+                              color: darkGreyColor,
                             )
                           ],
                         ),
@@ -203,7 +203,7 @@ class Profile_Page extends StatelessWidget {
                         Container(
                           height: 1,
                           width: double.infinity,
-                          decoration: BoxDecoration(color: Color(0xFFE3E8EF)),
+                          decoration: BoxDecoration(color: greyLightColor),
                         )
                       ],
                     ),
@@ -217,19 +217,19 @@ class Profile_Page extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.language,
-                                  color: Color(0xFF4B5565),
+                                  color: darkGreyColor,
                                 ),
                                 SizedBox(width: 12),
                                 Text(
                                   'Bahasa',
                                   style: TextStyle(
-                                      color: Color(0xFF4B5565), fontSize: 14),
+                                      color: darkGreyColor, fontSize: 14),
                                 )
                               ],
                             ),
                             Icon(
                               Icons.keyboard_arrow_right,
-                              color: Color(0xFF4B5565),
+                              color: darkGreyColor,
                             )
                           ],
                         ),
@@ -237,7 +237,7 @@ class Profile_Page extends StatelessWidget {
                         Container(
                           height: 1,
                           width: double.infinity,
-                          decoration: BoxDecoration(color: Color(0xFFE3E8EF)),
+                          decoration: BoxDecoration(color: greyLightColor),
                         )
                       ],
                     ),
@@ -251,19 +251,19 @@ class Profile_Page extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.star_border,
-                                  color: Color(0xFF4B5565),
+                                  color: darkGreyColor,
                                 ),
                                 SizedBox(width: 12),
                                 Text(
                                   'Beri Rating',
                                   style: TextStyle(
-                                      color: Color(0xFF4B5565), fontSize: 14),
+                                      color: darkGreyColor, fontSize: 14),
                                 )
                               ],
                             ),
                             Icon(
                               Icons.keyboard_arrow_right,
-                              color: Color(0xFF4B5565),
+                              color: darkGreyColor,
                             )
                           ],
                         ),
@@ -271,7 +271,7 @@ class Profile_Page extends StatelessWidget {
                         Container(
                           height: 1,
                           width: double.infinity,
-                          decoration: BoxDecoration(color: Color(0xFFE3E8EF)),
+                          decoration: BoxDecoration(color: greyLightColor),
                         )
                       ],
                     ),
@@ -285,19 +285,19 @@ class Profile_Page extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.privacy_tip_outlined,
-                                  color: Color(0xFF4B5565),
+                                  color: darkGreyColor,
                                 ),
                                 SizedBox(width: 12),
                                 Text(
                                   'Kebijakan Privasi',
                                   style: TextStyle(
-                                      color: Color(0xFF4B5565), fontSize: 14),
+                                      color: darkGreyColor, fontSize: 14),
                                 )
                               ],
                             ),
                             Icon(
                               Icons.keyboard_arrow_right,
-                              color: Color(0xFF4B5565),
+                              color: darkGreyColor,
                             )
                           ],
                         ),
@@ -305,7 +305,7 @@ class Profile_Page extends StatelessWidget {
                         Container(
                           height: 1,
                           width: double.infinity,
-                          decoration: BoxDecoration(color: Color(0xFFE3E8EF)),
+                          decoration: BoxDecoration(color: greyLightColor),
                         )
                       ],
                     ),
@@ -319,19 +319,19 @@ class Profile_Page extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.help_outline,
-                                  color: Color(0xFF4B5565),
+                                  color: darkGreyColor,
                                 ),
                                 SizedBox(width: 12),
                                 Text(
                                   'Pusat Bantuan',
                                   style: TextStyle(
-                                      color: Color(0xFF4B5565), fontSize: 14),
+                                      color: darkGreyColor, fontSize: 14),
                                 )
                               ],
                             ),
                             Icon(
                               Icons.keyboard_arrow_right,
-                              color: Color(0xFF4B5565),
+                              color: darkGreyColor,
                             )
                           ],
                         ),
@@ -339,7 +339,7 @@ class Profile_Page extends StatelessWidget {
                         Container(
                           height: 1,
                           width: double.infinity,
-                          decoration: BoxDecoration(color: Color(0xFFE3E8EF)),
+                          decoration: BoxDecoration(color: greyLightColor),
                         )
                       ],
                     ),
@@ -353,19 +353,19 @@ class Profile_Page extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.settings,
-                                  color: Color(0xFF4B5565),
+                                  color: darkGreyColor,
                                 ),
                                 SizedBox(width: 12),
                                 Text(
                                   'Pengaturan',
                                   style: TextStyle(
-                                      color: Color(0xFF4B5565), fontSize: 14),
+                                      color: darkGreyColor, fontSize: 14),
                                 )
                               ],
                             ),
                             Icon(
                               Icons.keyboard_arrow_right,
-                              color: Color(0xFF4B5565),
+                              color: darkGreyColor,
                             )
                           ],
                         ),
@@ -373,7 +373,7 @@ class Profile_Page extends StatelessWidget {
                         Container(
                           height: 1,
                           width: double.infinity,
-                          decoration: BoxDecoration(color: Color(0xFFE3E8EF)),
+                          decoration: BoxDecoration(color: greyLightColor),
                         )
                       ],
                     ),
@@ -403,7 +403,7 @@ class Profile_Page extends StatelessWidget {
                         Container(
                           height: 1,
                           width: double.infinity,
-                          decoration: BoxDecoration(color: Color(0xFFE3E8EF)),
+                          decoration: BoxDecoration(color: greyLightColor),
                         )
                       ],
                     ),
