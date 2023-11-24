@@ -6,6 +6,7 @@ import 'package:kampenies/bloc/employee/employee_bloc.dart';
 import 'package:kampenies/kampenies__app_icons.dart';
 import 'package:kampenies/theme.dart';
 import 'package:kampenies/widgets/card_employee.dart';
+import 'package:kampenies/widgets/skeleton_widget.dart';
 
 class EmployeePage extends StatefulWidget {
   const EmployeePage({super.key});
@@ -114,9 +115,13 @@ class _EmployeePageState extends State<EmployeePage> {
         body: BlocBuilder<EmployeeBloc, EmployeeState>(
           builder: (context, state) {
             if (state is EmployeeLoading) {
-              return Center(
-                heightFactor: screenHeight * 0.3,
-                child: const CircularProgressIndicator(),
+              return ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return SkeletonEmployee();
+                },
               );
             }
             if (state is EmployeeSuccess) {

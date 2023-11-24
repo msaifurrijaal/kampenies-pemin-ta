@@ -9,7 +9,7 @@ import 'package:kampenies/pages/media_page.dart';
 import 'package:kampenies/pages/profile_page.dart';
 import 'package:kampenies/app_icons.dart';
 
-import 'kampenies__app_icons.dart';
+import '../kampenies__app_icons.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({super.key});

@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kampenies/bloc/media/media_bloc.dart';
 import 'package:kampenies/kampenies__app_icons.dart';
 import 'package:kampenies/theme.dart';
-import '../widgets/item_widget_article.dart';
+import 'package:kampenies/widgets/skeleton_widget.dart';
+import '../widgets/card_article.dart';
 
 class Media_Page extends StatefulWidget {
   const Media_Page({super.key});
@@ -128,9 +129,13 @@ class _Media_PageState extends State<Media_Page> {
         body: BlocBuilder<MediaBloc, MediaState>(
           builder: (context, state) {
             if (state is ArticlesLoading) {
-              return Center(
-                heightFactor: screenHeight * 0.3,
-                child: const CircularProgressIndicator(),
+              return ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return const SkeletonArticle();
+                },
               );
             }
             if (state is ArticlesSuccess) {
@@ -138,7 +143,7 @@ class _Media_PageState extends State<Media_Page> {
                 shrinkWrap: true,
                 itemCount: state.articles.length,
                 itemBuilder: (context, index) {
-                  return ItemArticles(
+                  return CardArticle(
                     articles: state.articles[index],
                   );
                 },

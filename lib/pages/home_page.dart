@@ -5,10 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kampenies/bloc/employee/employee_bloc.dart';
 import 'package:kampenies/bloc/mentor/mentor_bloc.dart';
-import 'package:kampenies/navbar.dart';
+import 'package:kampenies/widgets/navbar.dart';
 import 'package:kampenies/theme.dart';
 import 'package:kampenies/widgets/card_employee.dart';
 import 'package:kampenies/widgets/card_mentor.dart';
+import 'package:kampenies/widgets/skeleton_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -164,8 +165,18 @@ class _HomePageState extends State<HomePage> {
                   child: BlocBuilder<MentorBloc, MentorState>(
                     builder: (context, state) {
                       if (state is MentorLoading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return ListView.separated(
+                          padding: EdgeInsets.only(left: 20),
+                          separatorBuilder: (context, index) => SizedBox(
+                            width: screenWidth * 0.02,
+                          ),
+                          scrollDirection: Axis.horizontal,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return SkeletonMentor();
+                          },
                         );
                       }
                       if (state is MentorSuccess) {
@@ -220,15 +231,13 @@ class _HomePageState extends State<HomePage> {
                 BlocBuilder<EmployeeBloc, EmployeeState>(
                   builder: (context, state) {
                     if (state is EmployeeLoading) {
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 100,
-                          ),
-                          Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ],
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return SkeletonEmployee();
+                        },
                       );
                     }
                     if (state is EmployeeSuccess) {

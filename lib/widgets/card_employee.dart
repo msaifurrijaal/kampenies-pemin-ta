@@ -37,6 +37,9 @@ class CardEmployee extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(12))),
                 child: Image.network(
                   employee.avatar,
+                  height: 125,
+                  width: 125,
+                  fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(width: 10),
