@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kampenies/models/articles.dart';
 import 'package:http/http.dart' as http;
-import 'package:kampenies/models/dataRepository.dart';
+import 'package:kampenies/models/data_repository.dart';
 
 part 'media_event.dart';
 part 'media_state.dart';

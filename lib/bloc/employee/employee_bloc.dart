@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 
-import '../../models/dataRepository.dart';
+import '../../models/data_repository.dart';
 import '../../models/employee.dart';
 
 part 'employee_event.dart';

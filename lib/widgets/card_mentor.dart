@@ -36,6 +36,7 @@ class CardMentor extends StatelessWidget {
               Container(
                 clipBehavior: Clip.antiAlias,
                 decoration: const BoxDecoration(shape: BoxShape.circle),
+                height: 80,
                 width: 80,
                 child: Image.network(mentor.images),
               ),

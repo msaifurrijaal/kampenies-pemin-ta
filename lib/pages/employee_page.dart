@@ -120,7 +120,7 @@ class _EmployeePageState extends State<EmployeePage> {
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (context, index) {
-                  return SkeletonEmployee();
+                  return const SkeletonEmployee();
                 },
               );
             }
