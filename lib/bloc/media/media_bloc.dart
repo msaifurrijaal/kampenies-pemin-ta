@@ -10,15 +10,18 @@ part 'media_state.dart';
 class MediaBloc extends Bloc<MediaEvent, MediaState> {
   MediaBloc() : super(ArticlesInitial()) {
     on<GetArticlesEvent>((event, emit) async {
-      emit(ArticlesLoading());
-      final response = await http.get(
-        Uri.parse(
-            'https://65518ed15c69a7790328e88a.mockapi.io/kampenies/articles'),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      );
-      dataRepository.setArticle(artikelFromJson(response.body));
+      if (dataRepository.article.isEmpty) {
+        emit(ArticlesLoading());
+        final response = await http.get(
+          Uri.parse(
+              'https://65518ed15c69a7790328e88a.mockapi.io/kampenies/articles'),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        );
+        dataRepository.setArticle(artikelFromJson(response.body));
+      }
+
       emit(ArticlesSuccess(articles: dataRepository.article));
     });
 

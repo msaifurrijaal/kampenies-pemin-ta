@@ -12,15 +12,17 @@ part 'employee_state.dart';
 class EmployeeBloc extends Bloc<EmployeeEvent, EmployeeState> {
   EmployeeBloc() : super(EmployeeInitial()) {
     on<GetEmployeeEvent>((event, emit) async {
-      emit(EmployeeLoading());
-      final response = await http.get(
-        Uri.parse(
-            'https://654b7a515b38a59f28ef2618.mockapi.io/kampenies/employee'),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      );
-      dataRepository.setEmployee(employeeFromJson(response.body));
+      if (dataRepository.employee.isEmpty) {
+        emit(EmployeeLoading());
+        final response = await http.get(
+          Uri.parse(
+              'https://654b7a515b38a59f28ef2618.mockapi.io/kampenies/employee'),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        );
+        dataRepository.setEmployee(employeeFromJson(response.body));
+      }
       emit(EmployeeSuccess(employee: dataRepository.employee));
     });
 
