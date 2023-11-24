@@ -2,7 +2,7 @@
 import 'package:kampenies/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:kampenies/pages/regis_page.dart';
-import 'package:kampenies/navbar.dart';
+import 'package:kampenies/widgets/navbar.dart';
 
 final formKey = GlobalKey<FormState>();
 

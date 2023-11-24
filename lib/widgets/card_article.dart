@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kampenies/models/articles.dart';
 import 'package:kampenies/theme.dart';
 
-class ItemArticles extends StatelessWidget {
-  const ItemArticles({
+class CardArticle extends StatelessWidget {
+  const CardArticle({
     Key? key,
     required this.articles,
   }) : super(key: key);

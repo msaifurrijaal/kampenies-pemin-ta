@@ -37,6 +37,9 @@ class CardEmployee extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(12))),
                 child: Image.network(
                   employee.avatar,
+                  height: 125,
+                  width: 125,
+                  fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(width: 10),
@@ -46,6 +49,8 @@ class CardEmployee extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RichText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       text: TextSpan(
                         children: [
                           TextSpan(
@@ -74,7 +79,7 @@ class CardEmployee extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       employee.deskripsi,
-                      maxLines: 3, // Atur sesuai kebutuhan
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       style: Theme.of(context).textTheme.bodySmall,
