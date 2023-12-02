@@ -69,7 +69,12 @@ class SkeletonArticle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      height: 250,
+      height: 220,
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: greyLightColor, width: 3),
+        ),
+      ),
       width: double.infinity,
       child: const Column(
         mainAxisSize: MainAxisSize.max,
@@ -113,7 +118,7 @@ class SkeletonArticle extends StatelessWidget {
                 width: 30,
               )
             ],
-          )
+          ),
         ],
       ),
     );

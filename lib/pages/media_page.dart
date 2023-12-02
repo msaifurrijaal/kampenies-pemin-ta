@@ -149,6 +149,11 @@ class _Media_PageState extends State<Media_Page> {
                 },
               );
             }
+            if (state is ArticleError) {
+              return Center(
+                child: Text(state.errorMessage),
+              );
+            }
             return const Center(
               child: Text("NO DATA"),
             );
