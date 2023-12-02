@@ -26,17 +26,7 @@ class SignUpError extends AuthState {
 
 class SignInLoading extends AuthState {}
 
-class SignInSuccess extends AuthState {
-  final String uid;
-  final String accessToken;
-  final String refreshToken;
-
-  SignInSuccess({
-    required this.uid,
-    required this.accessToken,
-    required this.refreshToken,
-  });
-}
+class SignInSuccess extends AuthState {}
 
 class SignInError extends AuthState {
   final String errorMessage;
@@ -45,3 +35,7 @@ class SignInError extends AuthState {
 }
 
 class LogoutSuccess extends AuthState {}
+
+class AuthSuccess extends AuthState {}
+
+class AuthError extends AuthState {}

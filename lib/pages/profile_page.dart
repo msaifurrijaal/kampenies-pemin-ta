@@ -1,6 +1,8 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kampenies/bloc/auth/auth_bloc.dart';
 import 'package:kampenies/theme.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -378,34 +380,37 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 16),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.logout,
-                                  color: Colors.red,
-                                ),
-                                SizedBox(width: 12),
-                                Text(
-                                  'Keluar',
-                                  style: TextStyle(
-                                      color: Colors.red, fontSize: 14),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Container(
-                          height: 1,
-                          width: double.infinity,
-                          decoration: BoxDecoration(color: greyLightColor),
-                        )
-                      ],
+                    GestureDetector(
+                      onTap: () => context.read<AuthBloc>().add(LogoutEvent()),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.logout,
+                                    color: Colors.red,
+                                  ),
+                                  SizedBox(width: 12),
+                                  Text(
+                                    'Keluar',
+                                    style: TextStyle(
+                                        color: Colors.red, fontSize: 14),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Container(
+                            height: 1,
+                            width: double.infinity,
+                            decoration: BoxDecoration(color: greyLightColor),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
