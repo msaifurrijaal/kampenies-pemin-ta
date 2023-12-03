@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kampenies/bloc/auth/auth_bloc.dart';
 import 'package:kampenies/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:kampenies/pages/regis_page.dart';
@@ -8,6 +10,8 @@ final formKey = GlobalKey<FormState>();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  static const routeName = "/login-page-route";
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -152,23 +156,89 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 const SizedBox(height: 24),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    minimumSize: MaterialStateProperty.all(
-                      Size(double.infinity, 48),
-                    ),
-                  ),
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Navbar()));
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    if (state is SignInLoading) {
+                      return ElevatedButton(
+                        style: ButtonStyle(
+                          minimumSize: MaterialStateProperty.all(
+                            Size(double.infinity, 48),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            color: whiteColor,
+                          ),
+                        ),
+                      );
                     }
+                    if (state is SignInSuccess) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        Navigator.pushReplacementNamed(
+                            context, Navbar.routeName);
+                      });
+                    }
+                    if (state is SignInError) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.errorMessage),
+                          ),
+                        );
+                      });
+                      return ElevatedButton(
+                        style: ButtonStyle(
+                          minimumSize: MaterialStateProperty.all(
+                            Size(double.infinity, 48),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                                  SingInEvent(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  ),
+                                );
+                          }
+                        },
+                        child: Text(
+                          'Masuk',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  color: whiteColor),
+                        ),
+                      );
+                    }
+                    return ElevatedButton(
+                      style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(
+                          Size(double.infinity, 48),
+                        ),
+                      ),
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          context.read<AuthBloc>().add(
+                                SingInEvent(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                ),
+                              );
+                        }
+                      },
+                      child: Text(
+                        'Masuk',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w500, color: whiteColor),
+                      ),
+                    );
                   },
-                  child: Text(
-                    'Masuk',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w500, color: whiteColor),
-                  ),
                 ),
                 const SizedBox(height: 28),
                 Row(
