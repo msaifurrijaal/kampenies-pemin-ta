@@ -14,7 +14,7 @@ import '../kampenies__app_icons.dart';
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
 
-  static const routeName = "/navbar";
+  static const routeName = "/navbar-route";
 
   @override
   State<Navbar> createState() => _NavbarState();

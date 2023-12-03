@@ -27,6 +27,7 @@ class MainApp extends StatelessWidget {
           RegisterPage.routeName: (context) => const RegisterPage(),
           DetailEmployeePage.routeName: (context) => const DetailEmployeePage(),
           Navbar.routeName: (context) => const Navbar(),
+          LoginPage.routeName: (context) => const LoginPage(),
         },
       ),
     );

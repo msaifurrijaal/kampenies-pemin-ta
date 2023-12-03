@@ -3,13 +3,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kampenies/bloc/auth/auth_bloc.dart';
+import 'package:kampenies/pages/login_page.dart';
 import 'package:kampenies/theme.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
   Widget build(BuildContext context) {
+    ProgressDialog progressDialog = ProgressDialog(context: context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -380,37 +388,153 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 16),
-                    GestureDetector(
-                      onTap: () => context.read<AuthBloc>().add(LogoutEvent()),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    BlocBuilder<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        if (state is LogoutLoading) {
+                          // progressDialog.show(msg: "Loading...");
+                        }
+                        if (state is LogoutSuccess) {
+                          // progressDialog.close();
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            Navigator.pushReplacementNamed(
+                                context, LoginPage.routeName);
+                          });
+                        }
+                        if (state is LogoutError) {
+                          // progressDialog.close();
+                          context.read<AuthBloc>().add(RefreshEvent());
+                          return BlocBuilder<AuthBloc, AuthState>(
+                            builder: (context, state) {
+                              if (state is RefreshLoading) {
+                                // progressDialog.show(msg: "Loading...");
+                              }
+                              if (state is RefreshSuccess) {
+                                // progressDialog.close();
+                                context.read<AuthBloc>().add(LogoutEvent());
+                              }
+                              if (state is RefreshError) {
+                                // progressDialog.close();
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(state.errorMessage),
+                                    ),
+                                  );
+                                });
+                                return GestureDetector(
+                                  onTap: () => context
+                                      .read<AuthBloc>()
+                                      .add(LogoutEvent()),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.logout,
+                                                color: Colors.red,
+                                              ),
+                                              SizedBox(width: 12),
+                                              Text(
+                                                'Keluar',
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 14),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 8),
+                                      Container(
+                                        height: 1,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: greyLightColor),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
+                              return GestureDetector(
+                                onTap: () =>
+                                    context.read<AuthBloc>().add(LogoutEvent()),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.logout,
+                                              color: Colors.red,
+                                            ),
+                                            SizedBox(width: 12),
+                                            Text(
+                                              'Keluar',
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 14),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 8),
+                                    Container(
+                                      height: 1,
+                                      width: double.infinity,
+                                      decoration:
+                                          BoxDecoration(color: greyLightColor),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        }
+                        return GestureDetector(
+                          onTap: () =>
+                              context.read<AuthBloc>().add(LogoutEvent()),
+                          child: Column(
                             children: [
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(
-                                    Icons.logout,
-                                    color: Colors.red,
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.logout,
+                                        color: Colors.red,
+                                      ),
+                                      SizedBox(width: 12),
+                                      Text(
+                                        'Keluar',
+                                        style: TextStyle(
+                                            color: Colors.red, fontSize: 14),
+                                      )
+                                    ],
                                   ),
-                                  SizedBox(width: 12),
-                                  Text(
-                                    'Keluar',
-                                    style: TextStyle(
-                                        color: Colors.red, fontSize: 14),
-                                  )
                                 ],
                               ),
+                              SizedBox(height: 8),
+                              Container(
+                                height: 1,
+                                width: double.infinity,
+                                decoration:
+                                    BoxDecoration(color: greyLightColor),
+                              )
                             ],
                           ),
-                          SizedBox(height: 8),
-                          Container(
-                            height: 1,
-                            width: double.infinity,
-                            decoration: BoxDecoration(color: greyLightColor),
-                          )
-                        ],
-                      ),
+                        );
+                      },
                     ),
                   ],
                 ),

@@ -34,7 +34,25 @@ class SignInError extends AuthState {
   SignInError({required this.errorMessage});
 }
 
+class LogoutLoading extends AuthState {}
+
 class LogoutSuccess extends AuthState {}
+
+class LogoutError extends AuthState {
+  final String errorMessage;
+
+  LogoutError({required this.errorMessage});
+}
+
+class RefreshLoading extends AuthState {}
+
+class RefreshSuccess extends AuthState {}
+
+class RefreshError extends AuthState {
+  final String errorMessage;
+
+  RefreshError({required this.errorMessage});
+}
 
 class AuthSuccess extends AuthState {}
 

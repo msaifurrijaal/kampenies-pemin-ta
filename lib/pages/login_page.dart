@@ -11,6 +11,8 @@ final formKey = GlobalKey<FormState>();
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  static const routeName = "/login-page-route";
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }

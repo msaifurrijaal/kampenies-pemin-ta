@@ -8,7 +8,7 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final String baseUrl = "https://pemin.aenzt.tech/api/v1/auth/";
+  final String baseUrl = "https://pemin.aenzt.tech/api/v1";
   AuthBloc() : super(AuthInitial()) {
     on<IsAuth>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -16,8 +16,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       String? accessToken = prefs.getString('accessToken');
       String? refreshToken = prefs.getString('refreshToken');
 
-      if (id != null && accessToken != null && refreshToken != null) {
-        emit(AuthSuccess());
+      if (accessToken != null && refreshToken != null) {
+        if (accessToken.isNotEmpty && refreshToken.isNotEmpty) {
+          emit(AuthSuccess());
+        } else {
+          emit(AuthError());
+        }
+      } else {
+        emit(AuthError());
       }
     });
 
@@ -25,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       emit(SignInLoading());
       try {
-        var url = Uri.parse("${baseUrl}login");
+        var url = Uri.parse("$baseUrl/auth/login");
 
         var response = await http.post(
           url,
@@ -50,6 +56,79 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       } catch (error) {
         emit(SignInError(errorMessage: error.toString()));
+      }
+    });
+
+    on<LogoutEvent>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? accessToken = prefs.getString('accessToken');
+      String? refreshToken = prefs.getString('refreshToken');
+
+      if (accessToken != null && refreshToken != null) {
+        if (accessToken.isNotEmpty && refreshToken.isNotEmpty) {
+          emit(LogoutLoading());
+          try {
+            var url = Uri.parse('$baseUrl/auth/logout');
+
+            var response = await http.post(
+              url,
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer $accessToken",
+              },
+            );
+
+            var responseData = json.decode(response.body);
+
+            if (response.statusCode >= 200 && response.statusCode < 300) {
+              prefs.setInt('id', 0);
+              prefs.setString('accessToken', '');
+              prefs.setString('refreshToken', '');
+              emit(LogoutSuccess());
+            } else {
+              throw 'Failed Login : ${responseData['message']}';
+            }
+          } catch (error) {
+            emit(LogoutError(errorMessage: error.toString()));
+          }
+        }
+      }
+    });
+
+    on<RefreshEvent>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? refreshToken = prefs.getString('refreshToken');
+
+      if (refreshToken != null) {
+        if (refreshToken.isNotEmpty) {
+          emit(RefreshLoading());
+          try {
+            var url = Uri.parse('$baseUrl/auth/refresh');
+
+            var response = await http.post(
+              url,
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer $refreshToken",
+              },
+            );
+
+            var responseData = json.decode(response.body);
+            if (response.statusCode >= 200 && response.statusCode < 300) {
+              prefs.setString(
+                  'accessToken', responseData['data']['access_token']);
+              prefs.setString(
+                  'refreshToken', responseData['data']['refresh_token']);
+              emit(RefreshSuccess());
+            } else {
+              throw 'Failed Login : ${responseData['message']}';
+            }
+          } catch (error) {
+            emit(RefreshError(errorMessage: error.toString()));
+          }
+        }
+      } else {
+        emit(RefreshError(errorMessage: 'RefreshToken is empty'));
       }
     });
   }

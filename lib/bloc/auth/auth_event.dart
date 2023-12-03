@@ -18,4 +18,6 @@ class SingInEvent extends AuthEvent {
 
 class IsAuth extends AuthEvent {}
 
+class RefreshEvent extends AuthEvent {}
+
 class LogoutEvent extends AuthEvent {}
