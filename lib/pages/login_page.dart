@@ -198,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             context.read<AuthBloc>().add(
-                                  SingInEvent(
+                                  SignInEvent(
                                     email: emailController.text,
                                     password: passwordController.text,
                                   ),
@@ -225,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           context.read<AuthBloc>().add(
-                                SingInEvent(
+                                SignInEvent(
                                   email: emailController.text,
                                   password: passwordController.text,
                                 ),

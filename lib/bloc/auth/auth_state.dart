@@ -6,17 +6,7 @@ final class AuthInitial extends AuthState {}
 
 class SignUpLoading extends AuthState {}
 
-class SignUpSuccess extends AuthState {
-  final String uid;
-  final String accessToken;
-  final String refreshToken;
-
-  SignUpSuccess({
-    required this.uid,
-    required this.accessToken,
-    required this.refreshToken,
-  });
-}
+class SignUpSuccess extends AuthState {}
 
 class SignUpError extends AuthState {
   final String errorMessage;
