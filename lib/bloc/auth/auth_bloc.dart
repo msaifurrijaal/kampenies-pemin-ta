@@ -27,7 +27,44 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<SingInEvent>((event, emit) async {
+    on<RefreshEvent>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? refreshToken = prefs.getString('refreshToken');
+
+      if (refreshToken != null) {
+        if (refreshToken.isNotEmpty) {
+          emit(RefreshLoading());
+          try {
+            var url = Uri.parse('$baseUrl/auth/refresh');
+
+            var response = await http.post(
+              url,
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer $refreshToken",
+              },
+            );
+
+            var responseData = json.decode(response.body);
+            if (response.statusCode >= 200 && response.statusCode < 300) {
+              prefs.setString(
+                  'accessToken', responseData['data']['access_token']);
+              prefs.setString(
+                  'refreshToken', responseData['data']['refresh_token']);
+              emit(RefreshSuccess());
+            } else {
+              throw 'Failed Login : ${responseData['message']}';
+            }
+          } catch (error) {
+            emit(RefreshError(errorMessage: error.toString()));
+          }
+        }
+      } else {
+        emit(RefreshError(errorMessage: 'RefreshToken is empty'));
+      }
+    });
+
+    on<SignInEvent>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       emit(SignInLoading());
       try {
@@ -95,40 +132,42 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<RefreshEvent>((event, emit) async {
+    on<SignUpEvent>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? refreshToken = prefs.getString('refreshToken');
+      emit(SignUpLoading());
+      try {
+        var url = Uri.parse("$baseUrl/auth/register");
 
-      if (refreshToken != null) {
-        if (refreshToken.isNotEmpty) {
-          emit(RefreshLoading());
-          try {
-            var url = Uri.parse('$baseUrl/auth/refresh');
+        var response = await http.post(
+          url,
+          body: json.encode({
+            "name": event.name,
+            "email": event.email,
+            "password": event.password,
+            "division": event.division,
+            "address": event.address,
+            "birthDate": event.birthDate,
+            "phoneNumber": event.phoneNumber,
+            "sex": event.sex
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        );
 
-            var response = await http.post(
-              url,
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer $refreshToken",
-              },
-            );
-
-            var responseData = json.decode(response.body);
-            if (response.statusCode >= 200 && response.statusCode < 300) {
-              prefs.setString(
-                  'accessToken', responseData['data']['access_token']);
-              prefs.setString(
-                  'refreshToken', responseData['data']['refresh_token']);
-              emit(RefreshSuccess());
-            } else {
-              throw 'Failed Login : ${responseData['message']}';
-            }
-          } catch (error) {
-            emit(RefreshError(errorMessage: error.toString()));
-          }
+        var responseData = json.decode(response.body);
+        print(responseData);
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          prefs.setInt('id', responseData['data']['id']);
+          prefs.setString('accessToken', responseData['data']['access_token']);
+          prefs.setString(
+              'refreshToken', responseData['data']['refresh_token']);
+          emit(SignUpSuccess());
+        } else {
+          throw 'Failed Login : ${responseData['message']}';
         }
-      } else {
-        emit(RefreshError(errorMessage: 'RefreshToken is empty'));
+      } catch (error) {
+        emit(SignUpError(errorMessage: error.toString()));
       }
     });
   }
