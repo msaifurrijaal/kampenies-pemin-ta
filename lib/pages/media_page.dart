@@ -18,7 +18,6 @@ class Media_Page extends StatefulWidget {
 class _Media_PageState extends State<Media_Page> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<MediaBloc>().add(GetArticlesEvent());
   }

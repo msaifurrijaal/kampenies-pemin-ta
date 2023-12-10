@@ -1,20 +1,28 @@
 import 'package:kampenies/models/employee.dart';
-import 'articles.dart';
+import 'package:kampenies/models/user.dart';
+import 'article.dart';
 
 class DataRepository {
-  List<Artikel> _originalArticle = [];
+  List<Article> _originalArticle = [];
   List<Employee> _originalEmployee = [];
+  List<User> _originalUser = [];
 
-  List<Artikel> get article => _originalArticle;
+  List<Article> get article => _originalArticle;
 
   List<Employee> get employee => _originalEmployee;
 
-  void setArticle(List<Artikel> data) {
+  List<User> get user => _originalUser;
+
+  void setArticle(List<Article> data) {
     _originalArticle = data;
   }
 
   void setEmployee(List<Employee> data) {
     _originalEmployee = data;
+  }
+
+  void setUser(List<User> data) {
+    _originalUser = data;
   }
 }
 

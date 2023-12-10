@@ -1,7 +1,9 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:kampenies/models/employee.dart';
+import 'package:kampenies/models/user.dart';
 import 'package:kampenies/theme.dart';
 import 'package:kampenies/util/utils.dart';
 import 'package:kampenies/widgets/card_age_widget.dart';
@@ -18,8 +20,8 @@ class DetailEmployeePage extends StatelessWidget {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double screenHeight =
         mediaQueryData.size.height - mediaQueryData.padding.top;
-    final employee = ModalRoute.of(context)?.settings.arguments as Employee;
-    final String careerPath = careerPathEmployee(employee.divisi);
+    final user = ModalRoute.of(context)?.settings.arguments as User;
+    final String careerPath = careerPathEmployee(user.division.name);
 
     return Scaffold(
       appBar: AppBar(
@@ -60,7 +62,9 @@ class DetailEmployeePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Image.network(
-                      employee.avatar,
+                      (user.sex == "M")
+                          ? "https://randomuser.me/api/portraits/men/${Random().nextInt(25)}.jpg"
+                          : "https://randomuser.me/api/portraits/women/${Random().nextInt(25)}.jpg",
                       width: double.infinity,
                       height: 250,
                       fit: BoxFit.cover,
@@ -72,7 +76,7 @@ class DetailEmployeePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            employee.name,
+                            user.name,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall
@@ -82,7 +86,7 @@ class DetailEmployeePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            employee.role,
+                            "Employee",
                             style:
                                 Theme.of(context).textTheme.bodyLarge?.copyWith(
                                       color: darkGreyColor,
@@ -91,7 +95,7 @@ class DetailEmployeePage extends StatelessWidget {
                           const SizedBox(height: 16),
                           Row(
                             children: [
-                              AgeCard(age: employee.usia),
+                              GenderCard(gender: user.sex),
                               const SizedBox(width: 8),
                               const LocationCard(),
                             ],
@@ -108,7 +112,7 @@ class DetailEmployeePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            employee.deskripsi,
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
@@ -129,7 +133,7 @@ class DetailEmployeePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            employee.divisi,
+                            user.division.name,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium

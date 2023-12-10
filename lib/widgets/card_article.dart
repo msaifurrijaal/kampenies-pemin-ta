@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kampenies/models/articles.dart';
+import 'package:kampenies/models/article.dart';
 import 'package:kampenies/theme.dart';
 
 class CardArticle extends StatelessWidget {
@@ -7,7 +7,7 @@ class CardArticle extends StatelessWidget {
     Key? key,
     required this.articles,
   }) : super(key: key);
-  final Artikel articles;
+  final Article articles;
 
   @override
   Widget build(BuildContext context) {

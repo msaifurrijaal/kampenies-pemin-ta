@@ -12,7 +12,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<IsAuth>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      int? id = prefs.getInt('id');
       String? accessToken = prefs.getString('accessToken');
       String? refreshToken = prefs.getString('refreshToken');
 
@@ -156,7 +155,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
 
         var responseData = json.decode(response.body);
-        print(responseData);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           prefs.setInt('id', responseData['data']['id']);
           prefs.setString('accessToken', responseData['data']['access_token']);

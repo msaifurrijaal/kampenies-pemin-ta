@@ -7,7 +7,7 @@ class ArticlesInitial extends MediaState {}
 class ArticlesLoading extends MediaState {}
 
 class ArticlesSuccess extends MediaState {
-  final List<Artikel> articles;
+  final List<Article> articles;
   ArticlesSuccess({required this.articles});
 }
 
