@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:kampenies/models/user.dart';
 import 'package:kampenies/theme.dart';
 import 'package:kampenies/util/utils.dart';
-import 'package:kampenies/widgets/card_age_widget.dart';
 import 'package:kampenies/widgets/card_location_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -93,13 +92,7 @@ class DetailEmployeePage extends StatelessWidget {
                                     ),
                           ),
                           const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              GenderCard(gender: user.sex),
-                              const SizedBox(width: 8),
-                              const LocationCard(),
-                            ],
-                          ),
+                          const LocationCard(),
                           const SizedBox(height: 24),
                           Text(
                             'Tentang Karyawan',

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:kampenies/models/user.dart';
 import 'package:kampenies/pages/detail_employee_page.dart';
 import 'package:kampenies/theme.dart';
-import 'package:kampenies/widgets/card_age_widget.dart';
 
 class CardEmployee extends StatelessWidget {
   const CardEmployee({
@@ -80,17 +79,16 @@ class CardEmployee extends StatelessWidget {
                           .bodyMedium
                           ?.copyWith(color: greyColor),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 8),
                     Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                      maxLines: 2,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       style: Theme.of(context).textTheme.bodySmall,
                       textAlign: TextAlign.justify,
                     ),
                     const SizedBox(height: 4),
-                    GenderCard(gender: user.sex),
                   ],
                 ),
               ),

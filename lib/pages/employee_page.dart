@@ -128,8 +128,6 @@ class _EmployeePageState extends State<EmployeePage> {
             }
             if (state is UserSuccess) {
               return ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
                 itemCount: state.users.length,
                 itemBuilder: (context, index) {
                   return CardEmployee(
