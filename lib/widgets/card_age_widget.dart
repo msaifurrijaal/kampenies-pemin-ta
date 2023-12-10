@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kampenies/theme.dart';
 
-class AgeCard extends StatelessWidget {
-  const AgeCard({
+class GenderCard extends StatelessWidget {
+  const GenderCard({
     super.key,
-    required this.age,
+    required this.gender,
   });
 
-  final int age;
+  final String gender;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +22,17 @@ class AgeCard extends StatelessWidget {
           foregroundColor: const MaterialStatePropertyAll(blueColor),
           backgroundColor: const MaterialStatePropertyAll(Color(0xffEFF8FF))),
       onPressed: () {},
-      icon: const Icon(
-        Icons.cases_outlined,
-        size: 20,
-      ),
+      icon: (gender == "M")
+          ? const Icon(
+              Icons.man,
+              size: 20,
+            )
+          : const Icon(
+              Icons.woman,
+              size: 20,
+            ),
       label: Text(
-        "$age Tahun",
+        gender,
         style:
             Theme.of(context).textTheme.bodySmall?.copyWith(color: blueColor),
       ),

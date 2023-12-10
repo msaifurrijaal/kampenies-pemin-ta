@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kampenies/models/articles.dart';
+import 'package:kampenies/models/article.dart';
 import 'package:http/http.dart' as http;
 import 'package:kampenies/models/data_repository.dart';
 
@@ -39,7 +39,7 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
     });
 
     on<SearchArticle>((event, emit) {
-      List<Artikel> filteredArtikels = dataRepository.article
+      List<Article> filteredArtikels = dataRepository.article
           .where((artikel) =>
               artikel.title.toLowerCase().contains(event.query.toLowerCase()))
           .toList();

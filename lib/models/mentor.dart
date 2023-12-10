@@ -1,8 +1,7 @@
-// To parse this JSON data, do
-//
-//     final mentor = mentorFromJson(jsonString);
-
 import 'dart:convert';
+
+import 'package:json_annotation/json_annotation.dart';
+part 'mentor.g.dart';
 
 List<Mentor> mentorFromJson(String str) =>
     List<Mentor>.from(json.decode(str).map((x) => Mentor.fromJson(x)));
@@ -10,6 +9,7 @@ List<Mentor> mentorFromJson(String str) =>
 String mentorToJson(List<Mentor> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+@JsonSerializable()
 class Mentor {
   final DateTime createdAt;
   final String name;
@@ -31,25 +31,7 @@ class Mentor {
     required this.id,
   });
 
-  factory Mentor.fromJson(Map<String, dynamic> json) => Mentor(
-        createdAt: DateTime.parse(json["createdAt"]),
-        name: json["name"],
-        images: json["images"],
-        title: json["title"],
-        description: json["description"],
-        category: json["category"],
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        id: json["id"],
-      );
+  factory Mentor.fromJson(Map<String, dynamic> json) => _$MentorFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-        "createdAt": createdAt.toIso8601String(),
-        "name": name,
-        "images": images,
-        "title": title,
-        "description": description,
-        "category": category,
-        "updatedAt": updatedAt.toIso8601String(),
-        "id": id,
-      };
+  Map<String, dynamic> toJson() => _$MentorToJson(this);
 }

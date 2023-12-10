@@ -1,15 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:kampenies/models/employee.dart';
+import 'package:kampenies/models/user.dart';
 import 'package:kampenies/pages/detail_employee_page.dart';
 import 'package:kampenies/theme.dart';
-import 'package:kampenies/widgets/card_age_widget.dart';
 
 class CardEmployee extends StatelessWidget {
   const CardEmployee({
     Key? key,
-    required this.employee,
+    required this.user,
   }) : super(key: key);
-  final Employee employee;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CardEmployee extends StatelessWidget {
         Navigator.pushNamed(
           context,
           DetailEmployeePage.routeName,
-          arguments: employee,
+          arguments: user,
         );
       },
       child: Container(
@@ -36,7 +37,9 @@ class CardEmployee extends StatelessWidget {
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(12))),
                 child: Image.network(
-                  employee.avatar,
+                  (user.sex == "M")
+                      ? "https://randomuser.me/api/portraits/men/${Random().nextInt(25)}.jpg"
+                      : "https://randomuser.me/api/portraits/women/${Random().nextInt(25)}.jpg",
                   height: 125,
                   width: 125,
                   fit: BoxFit.cover,
@@ -54,7 +57,7 @@ class CardEmployee extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: employee.divisi,
+                            text: user.division.name,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
@@ -63,30 +66,29 @@ class CardEmployee extends StatelessWidget {
                                 ),
                           ),
                         ],
-                        text: '${employee.name} - ',
+                        text: '${user.name} - ',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: blackColor, fontWeight: FontWeight.w700),
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      employee.role,
+                      'Employee',
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium
                           ?.copyWith(color: greyColor),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 8),
                     Text(
-                      employee.deskripsi,
-                      maxLines: 2,
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       softWrap: true,
                       style: Theme.of(context).textTheme.bodySmall,
                       textAlign: TextAlign.justify,
                     ),
                     const SizedBox(height: 4),
-                    AgeCard(age: employee.usia),
                   ],
                 ),
               ),

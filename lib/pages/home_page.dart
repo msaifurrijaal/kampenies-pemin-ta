@@ -3,8 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kampenies/bloc/employee/employee_bloc.dart';
+import 'package:kampenies/bloc/auth/auth_bloc.dart';
 import 'package:kampenies/bloc/mentor/mentor_bloc.dart';
+import 'package:kampenies/bloc/user/user_bloc.dart';
 import 'package:kampenies/widgets/navbar.dart';
 import 'package:kampenies/theme.dart';
 import 'package:kampenies/widgets/card_employee.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     context.read<MentorBloc>().add(GetMentorEvent());
-    context.read<EmployeeBloc>().add(GetEmployeeEvent());
+    context.read<UserBloc>().add(GetUserEvent());
   }
 
   @override
@@ -228,9 +229,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                BlocBuilder<EmployeeBloc, EmployeeState>(
+                BlocBuilder<UserBloc, UserState>(
                   builder: (context, state) {
-                    if (state is EmployeeLoading) {
+                    if (state is UserLoading) {
                       return ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -240,14 +241,49 @@ class _HomePageState extends State<HomePage> {
                         },
                       );
                     }
-                    if (state is EmployeeSuccess) {
+                    if (state is UserSuccess) {
                       return ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: state.employee.length,
+                        itemCount: state.users.length,
                         itemBuilder: (context, index) {
                           return CardEmployee(
-                            employee: state.employee[index],
+                            user: state.users[index],
+                          );
+                        },
+                      );
+                    }
+                    if (state is UserError) {
+                      context.read<AuthBloc>().add(RefreshEvent());
+                      return BlocBuilder<AuthBloc, AuthState>(
+                        builder: (context, state) {
+                          if (state is RefreshLoading) {
+                            return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: 3,
+                              itemBuilder: (context, index) {
+                                return SkeletonEmployee();
+                              },
+                            );
+                          }
+                          if (state is RefreshSuccess) {
+                            context.read<UserBloc>().add(GetUserEvent());
+                          }
+                          if (state is RefreshError) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(state.errorMessage),
+                                ),
+                              );
+                            });
+                            return const Center(
+                              child: Text('No Data'),
+                            );
+                          }
+                          return const Center(
+                            child: Text('No Data'),
                           );
                         },
                       );

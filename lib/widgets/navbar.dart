@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kampenies/bloc/employee/employee_bloc.dart';
 import 'package:kampenies/bloc/media/media_bloc.dart';
 import 'package:kampenies/bloc/mentor/mentor_bloc.dart';
+import 'package:kampenies/bloc/user/user_bloc.dart';
 import 'package:kampenies/pages/employee_page.dart';
 import 'package:kampenies/pages/home_page.dart';
 import 'package:kampenies/pages/media_page.dart';
@@ -37,7 +37,7 @@ class _NavbarState extends State<Navbar> {
           create: (context) => MentorBloc(),
         ),
         BlocProvider(
-          create: (context) => EmployeeBloc(),
+          create: (context) => UserBloc(),
         ),
         BlocProvider(
           create: (context) => MediaBloc(),

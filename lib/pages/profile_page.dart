@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kampenies/bloc/auth/auth_bloc.dart';
@@ -81,10 +83,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           Container(
                             width: 150,
                             height: 150,
-                            decoration: const ShapeDecoration(
+                            decoration: ShapeDecoration(
                               image: DecorationImage(
                                 image: NetworkImage(
-                                    "https://randomuser.me/api/portraits/men/5.jpg"),
+                                    "https://randomuser.me/api/portraits/men/${Random().nextInt(25)}.jpg"),
                                 fit: BoxFit.fill,
                               ),
                               shape: OvalBorder(
