@@ -162,14 +162,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Container(
-                  height: screenHeight * 0.3,
+                  height: 230,
                   child: BlocBuilder<MentorBloc, MentorState>(
                     builder: (context, state) {
                       if (state is MentorLoading) {
                         return ListView.separated(
                           padding: EdgeInsets.only(left: 20),
                           separatorBuilder: (context, index) => SizedBox(
-                            width: screenWidth * 0.02,
+                            width: 10,
                           ),
                           scrollDirection: Axis.horizontal,
                           physics: const NeverScrollableScrollPhysics(),
@@ -181,22 +181,19 @@ class _HomePageState extends State<HomePage> {
                         );
                       }
                       if (state is MentorSuccess) {
-                        return Container(
-                          height: screenHeight * 0.3,
-                          child: ListView.separated(
-                            padding: EdgeInsets.only(left: 20),
-                            separatorBuilder: (context, index) => SizedBox(
-                              width: screenWidth * 0.02,
-                            ),
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            itemCount: state.mentors.length,
-                            itemBuilder: (context, index) {
-                              return CardMentor(
-                                mentor: state.mentors[index],
-                              );
-                            },
+                        return ListView.separated(
+                          padding: EdgeInsets.only(left: 20),
+                          separatorBuilder: (context, index) => SizedBox(
+                            width: 10,
                           ),
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: state.mentors.length,
+                          itemBuilder: (context, index) {
+                            return CardMentor(
+                              mentor: state.mentors[index],
+                            );
+                          },
                         );
                       }
                       return const Center(

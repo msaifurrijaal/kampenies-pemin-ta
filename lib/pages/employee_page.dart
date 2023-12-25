@@ -26,15 +26,13 @@ class _EmployeePageState extends State<EmployeePage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           shadowColor: blueColor,
           elevation: 1,
           backgroundColor: Colors.white,
-          toolbarHeight: screenHeight * 0.2,
+          toolbarHeight: 140,
           automaticallyImplyLeading: false,
           title: Column(
             children: [
@@ -54,8 +52,8 @@ class _EmployeePageState extends State<EmployeePage> {
                   )
                 ],
               ),
-              SizedBox(
-                height: screenHeight * 0.03,
+              const SizedBox(
+                height: 16,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
