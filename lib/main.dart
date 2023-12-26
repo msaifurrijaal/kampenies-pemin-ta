@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kampenies/bloc/auth/auth_bloc.dart';
-import 'package:kampenies/pages/login_page.dart';
-import 'package:kampenies/pages/splash_page.dart';
-import 'package:kampenies/widgets/navbar.dart';
-import 'package:kampenies/pages/detail_employee_page.dart';
-import 'package:kampenies/pages/regis_page.dart';
-import 'package:kampenies/theme.dart';
+import 'package:kampenies/presentation/bloc/auth/auth_bloc.dart';
+import 'package:kampenies/presentation/pages/detail_employee_page.dart';
+import 'package:kampenies/presentation/pages/login_page.dart';
+import 'package:kampenies/presentation/pages/regis_page.dart';
+import 'package:kampenies/presentation/pages/splash_page.dart';
+import 'package:kampenies/presentation/widgets/navbar.dart';
+
+import 'package:kampenies/config/theme.dart';
 
 void main() {
   runApp(const MainApp());
