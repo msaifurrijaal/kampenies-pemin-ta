@@ -19,12 +19,14 @@ class DetailEmployeePage extends StatelessWidget {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double screenHeight =
         mediaQueryData.size.height - mediaQueryData.padding.top;
+    double screenWidth = mediaQueryData.size.width;
     final user = ModalRoute.of(context)?.settings.arguments as User;
     final String careerPath = careerPathEmployee(user.division.name);
-
+    print(screenWidth);
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: screenHeight * 0.08,
+        toolbarHeight:
+            (screenWidth < 400) ? screenHeight * 0.08 : screenHeight * 0.18,
         backgroundColor: whiteColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -54,7 +56,8 @@ class DetailEmployeePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: screenHeight * 0.8,
+            height:
+                (screenWidth < 400) ? screenHeight * 0.8 : screenHeight * 0.6,
             child: SingleChildScrollView(
               child: Container(
                 width: double.infinity,
@@ -225,7 +228,8 @@ class DetailEmployeePage extends StatelessWidget {
               ],
             ),
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            height: screenHeight * 0.12,
+            height:
+                (screenWidth < 400) ? screenHeight * 0.12 : screenHeight * 0.22,
             alignment: Alignment.center,
             child: ElevatedButton(
               style: ButtonStyle(
